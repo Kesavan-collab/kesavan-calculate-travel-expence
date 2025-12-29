@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="app-container">
         <!-- Sidebar -->
@@ -121,7 +123,52 @@
         </div>
     </div>
 
+    <!-- AI Chat Interface -->
+    <button class="chat-fab" onclick="travelAI.toggleChat()">
+        <i class="ph-fill ph-sparkle"></i>
+    </button>
+
+    <div class="chat-window closed" id="chat-window">
+        <div class="chat-header">
+            <h3><i class="ph-fill ph-robot"></i> Travel Assistant</h3>
+            <button class="close-chat" onclick="travelAI.toggleChat()">
+                <i class="ph-bold ph-x"></i>
+            </button>
+        </div>
+
+        <!-- API Key Setup Screen -->
+        <div class="api-key-overlay" id="api-key-screen">
+            <i class="ph-duotone ph-key" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+            <h4 style="margin-bottom: 0.5rem">Enable AI Features</h4>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem">
+                Enter your Gemini API key to chat with your expenses.
+                <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--primary)">Get one
+                    here</a>.
+            </p>
+            <input type="password" id="api-key-input" placeholder="Paste API Key here..."
+                style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 0.5rem; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: white;">
+            <button class="btn-primary" onclick="travelAI.saveKey()" style="width: 100%; justify-content: center;">
+                Start Chatting
+            </button>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+            <div class="message ai">
+                Hi! I can analyze your travel budget. Ask me anything like "How much have I spent on food?"
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask about your expenses..."
+                onkeypress="travelAI.handleEnter(event)">
+            <button onclick="travelAI.sendMessage()">
+                <i class="ph-fill ph-paper-plane-right"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Create Trip Modal (Simple Prompt Replacement) -->
     <script src="script.js"></script>
 </body>
+
 </html>
